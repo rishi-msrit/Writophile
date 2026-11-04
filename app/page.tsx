@@ -1,101 +1,98 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { getAllPosts, getPinnedPosts, getLatestPosts } from '@/lib/content';
+import siteConfig from '@/site.config';
+import PostCard from '@/components/PostCard';
+import type { Metadata } from 'next';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: siteConfig.name,
+  description: siteConfig.tagline,
+};
+
+export default async function HomePage() {
+  const allPosts = await getAllPosts();
+  const pinned = getPinnedPosts(allPosts);
+  const latest = getLatestPosts(allPosts, 10);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-14">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      {/* ── Pinned ───────────────────────────────────── */}
+      {pinned.length > 0 && (
+        <section className="pb-14 border-b border-[var(--color-rule)]" aria-label="Pinned posts">
+          <div className="flex items-baseline justify-between mb-6">
+            <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[var(--color-ink)]">
+              Pinned Writing
+            </h2>
+            <span className="text-xs font-mono text-[var(--color-ink-muted)]">
+              {pinned.length} selected piece{pinned.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+          <div>
+            {pinned.map((post) => (
+              <PostCard key={`${post.section}/${post.slug}`} post={post} showSection />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Latest ───────────────────────────────────── */}
+      {latest.length > 0 && (
+        <section className="py-14 border-b border-[var(--color-rule)]" aria-label="Latest posts">
+          <div className="flex items-baseline justify-between mb-6">
+            <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[var(--color-ink)]">
+              Latest Writing
+            </h2>
+            <div className="flex items-center gap-2.5 text-xs font-mono flex-wrap">
+              <Link href="/technical/" className="text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] no-underline">
+                Technical
+              </Link>
+              <span className="text-[var(--color-rule)]">/</span>
+              <Link href="/fiction/" className="text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] no-underline">
+                Fiction
+              </Link>
+              <span className="text-[var(--color-rule)]">/</span>
+              <Link href="/bits-and-bytes/" className="text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] no-underline">
+                Bits &amp; Bytes
+              </Link>
+              <span className="text-[var(--color-rule)]">/</span>
+              <Link href="/blog/" className="text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] no-underline">
+                Blog
+              </Link>
+            </div>
+          </div>
+          <div>
+            {latest.map((post) => (
+              <PostCard key={`${post.section}/${post.slug}`} post={post} showSection />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Find me elsewhere ────────────────────────── */}
+      <section className="py-14" aria-label="Find me elsewhere">
+        <h2 className="text-2xl font-serif font-semibold text-[var(--color-ink)] mb-4">
+          Elsewhere
+        </h2>
+        <p className="text-sm text-[var(--color-ink-muted)] mb-6 max-w-lg">
+          Profiles, repositories, fiction serialization, and direct contact.
+        </p>
+        <ul className="flex flex-wrap gap-3 list-none m-0 p-0">
+          {siteConfig.socials.map((s) => (
+            <li key={s.platform}>
+              <a
+                href={s.href}
+                rel="noopener noreferrer"
+                target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+                className="stamp-btn"
+              >
+                {s.label} ↗
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
     </div>
   );
 }

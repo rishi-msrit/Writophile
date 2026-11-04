@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Warm cream background -->
+  <rect width="32" height="32" rx="6" fill="#FAF7F2"/>
+  <!-- Pen nib shape -->
+  <path d="M16 4 L26 14 L16 28 L6 14 Z" fill="#1E3F66"/>
+  <!-- Ink drop -->
+  <circle cx="16" cy="27" r="2" fill="#1E3F66"/>
+  <!-- Split line -->
+  <line x1="16" y1="8" x2="16" y2="22" stroke="#FAF7F2" stroke-width="1" opacity="0.8"/>
+</svg>

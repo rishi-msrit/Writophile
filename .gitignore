@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated assets — regenerated at build time
+# Comment out if you prefer to commit them
+# public/cursor/pen-nib-32.png
+# public/cursor/pen-nib-64.png
+# public/og-default.png
