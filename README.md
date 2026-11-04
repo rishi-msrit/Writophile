@@ -9,7 +9,7 @@ The core design principle is zero maintenance overhead: no database, no backend 
 ## Technical Architecture
 
 - **Framework:** Next.js 14 (App Router, TypeScript)
-- **Export Mode:** Full static export (`output: 'export'`)
+- **Deployment:** Vercel (Native SSG deployment, pre-rendered static delivery)
 - **Styling:** Tailwind CSS with an antique parchment color system and editorial serif typography (Newsreader, Lora, JetBrains Mono)
 - **Markdown Pipeline:** Unified, Remark (GFM, custom highlight spans), Rehype (Shiki syntax highlighting, slug anchors, alert blocks, scrollable tables)
 - **Plain Text Processing:** Custom parser for raw `.txt` files with automated scene breaks (`***` / `---`), paragraph separation, and CRLF normalization
