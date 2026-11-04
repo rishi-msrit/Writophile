@@ -1,6 +1,4 @@
 {
-  "buildCommand": "node scripts/generate-cursor.mjs && node scripts/generate-og.mjs && next build",
-  "outputDirectory": "out",
   "headers": [
     {
       "source": "/rss.xml",
