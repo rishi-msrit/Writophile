@@ -10,7 +10,6 @@ export function FontSizeInit() {
       if (saved) {
         const px = parseInt(saved, 10);
         if (!isNaN(px)) {
-          document.documentElement.style.fontSize = `${px}px`;
           document.documentElement.style.setProperty('--prose-font-size', `${px}px`);
         }
       }

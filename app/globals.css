@@ -455,6 +455,15 @@ hr.scene-break::before, .scene-break::before {
 }
 
 /* ═══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  :root {
+    --prose-font-size: 1.0625rem; /* Crisp, readable scale for mobile screens */
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
    PRINT
    ═══════════════════════════════════════════════════════ */
 @media print {

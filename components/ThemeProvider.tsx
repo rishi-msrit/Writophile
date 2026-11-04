@@ -13,27 +13,30 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    // Read from localStorage safely
+    // Default to light mode for every new visitor.
+    // Only switch to dark if the user explicitly clicked the night toggle and saved it.
     let saved: Theme | null = null;
     try {
       saved = localStorage.getItem('theme') as Theme | null;
     } catch {}
 
-    if (saved === 'dark' || saved === 'light') {
-      setTheme(saved);
-      document.documentElement.classList.toggle('dark', saved === 'dark');
+    if (saved === 'dark') {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
     } else {
-      // Respect system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', prefersDark);
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggle = () => {
     const next: Theme = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
-    document.documentElement.classList.toggle('dark', next === 'dark');
+    if (next === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     try {
       localStorage.setItem('theme', next);
     } catch {}

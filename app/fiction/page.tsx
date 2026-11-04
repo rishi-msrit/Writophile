@@ -14,18 +14,18 @@ export const metadata: Metadata = {
 function StoryCard({ story }: { story: Story }) {
   return (
     <article className="py-7 border-b border-[var(--color-rule)] last:border-b-0 group">
-      <div className="flex items-center gap-3 text-xs text-[var(--color-ink-muted)] mb-2 font-mono">
-        <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium">
+      <div className="flex items-center gap-1.5 sm:gap-3 text-[10.5px] sm:text-xs text-[var(--color-ink-muted)] mb-2 font-mono flex-wrap">
+        <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium whitespace-nowrap">
           {story.chapters.length} {story.chapters.length === 1 ? 'Chapter' : 'Chapters'}
         </span>
         <span className="opacity-40">·</span>
-        <span className={story.status === 'complete' ? 'text-emerald-700 dark:text-emerald-400 font-medium' : 'text-amber-700 dark:text-amber-400 font-medium'}>
+        <span className={`whitespace-nowrap font-medium ${story.status === 'complete' ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>
           {story.status}
         </span>
         <span className="opacity-40">·</span>
-        <span>{story.totalReadingTime} total</span>
+        <span className="whitespace-nowrap">{story.totalReadingTime} total</span>
         {story.pinned && (
-          <span className="text-[var(--color-accent)] font-medium text-[11px] uppercase tracking-wider ml-1">
+          <span className="text-[var(--color-accent)] font-medium text-[10px] sm:text-[11px] uppercase tracking-wider ml-0.5 sm:ml-1 whitespace-nowrap">
             ★ Pinned
           </span>
         )}

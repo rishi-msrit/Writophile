@@ -27,25 +27,25 @@ export default function PostCard({ post, showSection }: PostCardProps) {
   return (
     <article className="py-7 border-b border-[var(--color-rule)] last:border-b-0 group">
       {/* Metadata line */}
-      <div className="flex items-center gap-2.5 text-xs text-[var(--color-ink-muted)] mb-2.5 font-mono">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 text-[10.5px] sm:text-xs text-[var(--color-ink-muted)] mb-2 font-mono flex-wrap">
         {showSection && (
-          <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium">
+          <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium whitespace-nowrap">
             {SECTION_LABEL[post.section] ?? post.section}
           </span>
         )}
         {showSection && <span className="opacity-40">·</span>}
         {post.date && (
-          <time dateTime={post.date}>
+          <time dateTime={post.date} className="whitespace-nowrap">
             {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
               year: 'numeric', month: 'short', day: 'numeric',
             })}
           </time>
         )}
-        {!post.date && <span>Undated</span>}
+        {!post.date && <span className="whitespace-nowrap">Undated</span>}
         <span className="opacity-40">·</span>
-        <span>{post.readingTime}</span>
+        <span className="whitespace-nowrap">{post.readingTime}</span>
         {post.pinned && (
-          <span className="ml-1 text-[var(--color-accent)] font-medium text-[11px] uppercase tracking-wider">
+          <span className="ml-0.5 sm:ml-1 text-[var(--color-accent)] font-medium text-[10px] sm:text-[11px] uppercase tracking-wider whitespace-nowrap">
             ★ Pinned
           </span>
         )}
@@ -58,7 +58,7 @@ export default function PostCard({ post, showSection }: PostCardProps) {
             target="_blank"
             aria-label={label}
             title={label}
-            className="ml-auto text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-1 text-[11px]"
+            className="ml-auto text-[var(--color-ink-muted)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-1 text-[10px] sm:text-[11px] whitespace-nowrap"
           >
             <span className="hidden sm:inline opacity-80">{label}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5" aria-hidden="true">

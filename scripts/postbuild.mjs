@@ -23,3 +23,4 @@ if (fs.existsSync(dotNext)) {
   }
   console.log('[postbuild] Synchronized .next manifests and build output to out/');
 }
+

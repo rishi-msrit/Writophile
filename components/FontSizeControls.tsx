@@ -22,7 +22,6 @@ export default function FontSizeControls() {
   }, []);
 
   function applySize(px: number) {
-    document.documentElement.style.fontSize = `${px}px`;
     document.documentElement.style.setProperty('--prose-font-size', `${px}px`);
   }
 

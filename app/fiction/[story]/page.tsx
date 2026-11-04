@@ -53,31 +53,31 @@ export default async function FictionStoryPage({ params }: Props) {
         )}
 
         <header className="mb-10 pb-8 border-b border-[var(--color-rule)]">
-          <div className="flex items-center gap-3 text-xs font-mono text-[var(--color-ink-muted)] mb-3">
-            <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium">Fiction</span>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-3 text-[10.5px] sm:text-xs font-mono text-[var(--color-ink-muted)] mb-3">
+            <span className="uppercase tracking-wider text-[var(--color-accent)] font-medium whitespace-nowrap">Fiction</span>
             <span className="opacity-40">·</span>
-            <span>{story.chapters.length} Chapters</span>
+            <span className="whitespace-nowrap">{story.chapters.length} Chapters</span>
             <span className="opacity-40">·</span>
-            <span className={story.status === 'complete' ? 'text-emerald-700 dark:text-emerald-400 font-medium' : 'text-amber-700 dark:text-amber-400 font-medium'}>
+            <span className={`whitespace-nowrap font-medium ${story.status === 'complete' ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>
               {story.status}
             </span>
-            {story.pinned && <span>· ★ Pinned</span>}
+            {story.pinned && <span className="whitespace-nowrap text-[var(--color-accent)]">· ★ Pinned</span>}
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-semibold text-[var(--color-ink)] mb-4 leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-semibold text-[var(--color-ink)] mb-4 leading-tight tracking-tight">
             {story.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-[var(--color-ink-muted)] mb-4">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 text-[10.5px] sm:text-xs font-mono text-[var(--color-ink-muted)] mb-4">
             {story.date && (
-              <time dateTime={story.date}>
+              <time dateTime={story.date} className="whitespace-nowrap">
                 {new Date(story.date + 'T00:00:00').toLocaleDateString('en-US', {
-                  year: 'numeric', month: 'long', day: 'numeric',
+                  year: 'numeric', month: 'short', day: 'numeric',
                 })}
               </time>
             )}
             {story.date && <span className="opacity-40">·</span>}
-            <span>{story.totalReadingTime} total reading time</span>
+            <span className="whitespace-nowrap">{story.totalReadingTime} total reading time</span>
           </div>
 
           {story.summary && (

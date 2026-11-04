@@ -50,16 +50,16 @@ export default async function BitsAndBytesPostPage({ params }: Props) {
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-[var(--color-ink-muted)] mb-4">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 text-[10.5px] sm:text-xs font-mono text-[var(--color-ink-muted)] mb-4">
             {post.date && (
-              <time dateTime={post.date}>
+              <time dateTime={post.date} className="whitespace-nowrap">
                 {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
-                  year: 'numeric', month: 'long', day: 'numeric',
+                  year: 'numeric', month: 'short', day: 'numeric',
                 })}
               </time>
             )}
             {post.date && <span className="opacity-40">·</span>}
-            <span>{post.readingTime}</span>
+            <span className="whitespace-nowrap">{post.readingTime}</span>
           </div>
 
           {post.tags.length > 0 && (
