@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/generate-cursor.mjs && node scripts/generate-og.mjs && next build",
-    "build:win": "node scripts/generate-cursor.mjs; node scripts/generate-og.mjs; npx next build",
+    "build": "node scripts/generate-cursor.mjs && node scripts/generate-og.mjs && next build && node scripts/postbuild.mjs",
+    "postbuild": "node scripts/postbuild.mjs",
+    "build:win": "node scripts/generate-cursor.mjs; node scripts/generate-og.mjs; npx next build; node scripts/postbuild.mjs",
     "start": "next start",
     "lint": "next lint",
     "check": "tsx scripts/check.ts",
