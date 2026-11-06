@@ -61,15 +61,4 @@ export interface ChapterMeta {
 /** A standalone fiction piece (not a story) */
 export type StandalonePiece = Post;
 
-/** Source entry from _sources.yml */
-export interface RemoteSource {
-  owner: string;
-  repo: string;
-  path: string;
-  branch?: string;
-  slug: string;
-  title?: string;
-  summary?: string;
-  tags?: string[];
-}
 
